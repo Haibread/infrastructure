@@ -24,7 +24,7 @@ jobs:
     steps:
 
     - name: Setup environment
-      run : sudo apt update -y && sudo apt install -y curl unzip git
+      run : apt update -y && apt install -y curl unzip git
 
     - name: Setup Terraform
       id: setup
