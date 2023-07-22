@@ -23,6 +23,9 @@ jobs:
     name: Terraform
     steps:
 
+    - name: Setup environment
+      run : sudo apt update -y && sudo apt install -y curl unzip git
+
     - name: Setup Terraform
       id: setup
       uses: hashicorp/setup-terraform@v2
