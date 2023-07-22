@@ -57,6 +57,7 @@ jobs:
     - name: Terraform Plan
       id: plan
       run: terraform plan -input=false -no-color -out tf.plan
+      working-directory: ./terraform
       env:
         TF_VAR_VSPHERE_USER : ${{ secrets.VSPHERE_USER }}
         TF_VAR_VSPHERE_PASSWORD : ${{ secrets.VSPHERE_PASSWORD }}
@@ -66,6 +67,7 @@ jobs:
     - name: Terraform Show
       id: show
       run: terraform show -no-color tf.plan 2>&1 > /tmp/plan.txt
+      working-directory: ./terraform
       env:
         TF_VAR_VSPHERE_USER : ${{ secrets.VSPHERE_USER }}
         TF_VAR_VSPHERE_PASSWORD : ${{ secrets.VSPHERE_PASSWORD }}
