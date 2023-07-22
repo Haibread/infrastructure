@@ -23,6 +23,8 @@ jobs:
     name: Terraform
     steps:
 
+    - uses: actions/checkout@v3
+
     - name: Setup environment
       run : apt update -y && apt install -y curl unzip git
 
