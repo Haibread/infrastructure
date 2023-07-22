@@ -18,6 +18,7 @@ permissions:
 
 jobs:
   terraform:
+    container : ubuntu:latest
     runs-on: [self-hosted, linux, x64]
     name: Terraform
     steps:
