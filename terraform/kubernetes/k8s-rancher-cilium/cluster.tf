@@ -19,14 +19,14 @@ resource "rancher2_machine_config_v2" "master_config" {
     datastore     = "vsanDatastore"
     //folder = ""
     pool        = "FX2S/Resources"
-    memory_size = 8192
-    network     = ["TKG Management Network - 111"]
+    memory_size = var.cluster_controlplane_memory
+    network     = ["${var.cluster_controlplane_network_name}"]
   }
 }
 
 resource "rancher2_cluster_v2" "tfcluster" {
-  name                  = "tfcluster"
-  kubernetes_version    = "v1.26.6+rke2r1"
+  name                  = var.cluster_name
+  kubernetes_version    = var.cluster_kubernetes_version
   enable_network_policy = false
   rke_config {
     machine_pools {

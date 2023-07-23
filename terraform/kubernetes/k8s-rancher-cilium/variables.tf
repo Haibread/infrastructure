@@ -42,6 +42,10 @@ variable "cluster_name" {
   default = "k8s-rancher-cilium"
 }
 
+variable "cluster_kubernetes_version" {
+  type = string
+}
+
 # Worker node vars
 variable "cluster_worker_count" {
   type    = number
@@ -106,4 +110,25 @@ variable "cluster_controlplane_disk" {
 
 variable "cluster_image_name" {
   type = string
+}
+
+# Network vars
+variable "cluster_network_cidr" {
+  type    = string
+  default = ""
+}
+
+variable "cluster_worker_network_name" {
+  type    = string
+  default = ""
+}
+
+variable "cluster_etcd_network_name" {
+  type    = string
+  default = ""
+}
+
+variable "cluster_controlplane_network_name" {
+  type    = string
+  default = ""
 }
