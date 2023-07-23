@@ -11,25 +11,25 @@ module "k8s-rancher-cilium" {
   cluster_vmware_datacenter    = "Homelab"
   cluster_vmware_resource_pool = "FX2S/Resources"
 
-  cluster_name                      = "test-cluster-0"
-  cluster_kubernetes_version        = "v1.26.6+rke2r1"
-  cluster_image_name                = "jammy-server-cloudimg-prepared-3"
+  cluster_name               = "test-cluster-0"
+  cluster_kubernetes_version = "v1.26.6+rke2r1"
+  cluster_image_name         = "jammy-server-cloudimg-prepared-3"
 
-  cluster_controlplane_cpu    = 2
-  cluster_controlplane_memory = 4096
-  cluster_controlplane_disk = 20
-  cluster_controlplane_count = 1
+  cluster_controlplane_cpu          = 2
+  cluster_controlplane_memory       = 4096
+  cluster_controlplane_disk         = 20
+  cluster_controlplane_count        = 1
   cluster_controlplane_network_name = "TKG Management Network - 111"
 
-  cluster_etcd_cpu    = 2
-  cluster_etcd_memory = 4096
-  cluster_etcd_disk = 20
-  cluster_etcd_count = 1
+  cluster_etcd_cpu          = 2
+  cluster_etcd_memory       = 4096
+  cluster_etcd_disk         = 20
+  cluster_etcd_count        = 1
   cluster_etcd_network_name = "TKG Management Network - 111"
 
-  cluster_worker_cpu    = 2
-  cluster_worker_memory = 4096
-  cluster_worker_disk = 20
-  cluster_worker_count = 1
+  cluster_worker_cpu          = 2
+  cluster_worker_memory       = 4096
+  cluster_worker_disk         = 20
+  cluster_worker_count        = 1
   cluster_worker_network_name = "TKG Workload network - 112"
 }
