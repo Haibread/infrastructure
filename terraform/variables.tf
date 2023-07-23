@@ -3,12 +3,12 @@ variable "rancher_access_key" {
 }
 
 variable "rancher_secret_key" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "vsphere_user" {
-  type    = string
+  type = string
 }
 
 variable "vsphere_password" {
