@@ -27,7 +27,7 @@ provider "helm" {
   }
 }
 
-provider "flux"{
+provider "flux" {
   kubernetes {
     host                   = module.vsphere-k8s-rancher-cilium.cluster-endpoint
     cluster_ca_certificate = base64decode(module.vsphere-k8s-rancher-cilium.certificate-authority-data)
