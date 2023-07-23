@@ -16,6 +16,10 @@ terraform {
       source  = "fluxcd/flux"
       version = "1.0.1"
     }
+    github = {
+      source  = "integrations/github"
+      version = ">=5.18.0"
+    }
   }
 }
 
@@ -34,9 +38,27 @@ provider "flux" {
     token                  = module.vsphere-k8s-rancher-cilium.kubeconfig-token
   }
   git = {
-    url = "https://github.com/Haibread/infrastructure.git"
-    http = {
-      allow_insecure_http = false
+    url = "ssh://git@github.com/Haibread/infrastructure.git"
+    ssh = {
+      username    = "git"
+      private_key = tls_private_key.flux.private_key_pem
     }
   }
+}
+
+provider "github" {
+  owner = "Haibread"
+  token = var.github_token
+}
+
+resource "tls_private_key" "flux" {
+  algorithm   = "ECDSA"
+  ecdsa_curve = "P256"
+}
+
+resource "github_repository_deploy_key" "this" {
+  title      = "Flux"
+  repository = "infrastructure"
+  key        = tls_private_key.flux.public_key_openssh
+  read_only  = "false"
 }
