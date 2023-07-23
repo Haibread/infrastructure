@@ -133,15 +133,15 @@ variable "cluster_network_cidr" {
 
 variable "cluster_worker_network_name" {
   type    = string
-  default = ""
+  //default = ""
 }
 
 variable "cluster_etcd_network_name" {
   type    = string
-  default = ""
+  //default = ""
 }
 
 variable "cluster_controlplane_network_name" {
   type    = string
-  default = ""
+  //default = ""
 }

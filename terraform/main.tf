@@ -1,5 +1,5 @@
-module "k8s-rancher-cilium" {
-  source = "./kubernetes/k8s-rancher-cilium"
+module "vsphere-k8s-rancher-cilium" {
+  source = "./kubernetes/vsphere-k8s-rancher-cilium"
 
   rancher_url             = "https://192.168.0.5:6587"
   vsphere_vcenter_address = "vcenter.homelab.lan"
