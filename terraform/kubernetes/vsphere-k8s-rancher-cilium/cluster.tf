@@ -94,5 +94,88 @@ resource "rancher2_cluster_v2" "tfcluster" {
         kind = rancher2_machine_config_v2.worker_config.kind
       }
     }
+
+    machine_global_config = <<EOF
+cluster-cidr: 10.111.0.0/16
+cluster-dns: 10.112.0.10
+cluster-domain: cluster.lan
+cni: cilium
+disable-kube-proxy: true
+etcd-expose-metrics: false
+service-cidr: 10.112.0.0/16
+service-node-port-range: 30000-31000
+EOF
+
+    upgrade_strategy {
+      max_surge       = "25%"
+      max_unavailable = "25%"
+    }
+
+    etcd {
+      snapshot_schedule_cron = "0 */5 * * *"
+      snapshot_retention     = 5
+    }
+
+    chart_values = <<EOF
+rancher-vsphere-cpi:
+  vCenter:
+    datacenters: ${var.cluster_vmware_datacenter}
+    host: ${var.vsphere_vcenter_address}
+    password: ${var.vsphere_password}
+    username: ${var.vsphere_user}
+rancher-vsphere-csi:
+  asyncQueryVolume:
+    enabled: true
+  csiAuthCheck:
+    enabled: true
+  improvedCsiIdempotency:
+    enabled: true
+  improvedVolumeTopology:
+    enabled: true
+  onlineVolumeExtend:
+    enabled: true
+  storageClass:
+    allowVolumeExpansion: true
+  triggerCsiFullsync:
+    enabled: true
+  vCenter:
+    datacenters: ${var.cluster_vmware_datacenter}
+    host: ${var.vsphere_vcenter_address}
+    password: ${var.vsphere_password}
+    username: ${var.vsphere_user}
+rke2-cilium:
+  bgpControlPlane:
+    enabled: true
+  cilium:
+    ipv6:
+      enabled: false
+  hubble:
+    enabled: true
+    metrics:
+      serviceMonitor:
+        enabled: true
+        interval: 30s
+    relay:
+      enabled: true
+      prometheus:
+        serviceMonitor:
+          enabled: true
+          interval: 30s
+    ui:
+      enabled: true
+  image:
+    tag: v1.13.4
+  ingressController:
+    enabled: true
+  k8sServiceHost: 127.0.0.1
+  k8sServicePort: '6443'
+  kubeProxyReplacement: strict
+  operator:
+    image:
+      tag: v1.13.4
+  preflight:
+    image:
+      tag: v1.13.4
+EOF
   }
 }
