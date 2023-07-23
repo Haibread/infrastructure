@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.3.0"
     }
+    flux = {
+      source  = "fluxcd/flux"
+      version = "1.0.1"
+    }
   }
 }
 
@@ -20,5 +24,16 @@ provider "helm" {
     host                   = module.vsphere-k8s-rancher-cilium.cluster-endpoint
     cluster_ca_certificate = base64decode(module.vsphere-k8s-rancher-cilium.certificate-authority-data)
     token                  = module.vsphere-k8s-rancher-cilium.kubeconfig-token
+  }
+}
+
+provider "flux"{
+  kubernetes {
+    host                   = module.vsphere-k8s-rancher-cilium.cluster-endpoint
+    cluster_ca_certificate = base64decode(module.vsphere-k8s-rancher-cilium.certificate-authority-data)
+    token                  = module.vsphere-k8s-rancher-cilium.kubeconfig-token
+  }
+  git = {
+    url = "git@github.com:Haibread/infrastructure.git"
   }
 }
