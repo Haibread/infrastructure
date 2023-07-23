@@ -16,13 +16,13 @@ variable "rancher_secret_key" {
 }
 
 variable "vsphere_vcenter_address" {
-    type    = string
-    default = ""
+  type    = string
+  default = ""
 }
 
 variable "vsphere_vcenter_port" {
-    type    = string
-    default = "443"
+  type    = string
+  default = "443"
 }
 
 variable "vsphere_user" {
@@ -105,5 +105,5 @@ variable "cluster_controlplane_disk" {
 }
 
 variable "cluster_image_name" {
-    type    = string
+  type = string
 }

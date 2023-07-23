@@ -14,7 +14,7 @@ resource "rancher2_machine_config_v2" "master_config" {
     cfgparam      = ["disk.enableUUID=TRUE"]
     cpu_count     = 4
     creation_type = "vm"
-    clone_from    = "jammy-server-cloudimg-prepared-3"
+    clone_from    = var.cluster_image_name
     datacenter    = "Homelab"
     datastore     = "vsanDatastore"
     //folder = ""
