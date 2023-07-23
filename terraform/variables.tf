@@ -9,6 +9,7 @@ variable "rancher_secret_key" {
 
 variable "vsphere_user" {
   type = string
+  default = ""
 }
 
 variable "vsphere_password" {
