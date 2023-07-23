@@ -8,7 +8,7 @@ module "k8s-rancher-cilium" {
   vsphere_user            = var.vsphere_user
   vsphere_password        = var.vsphere_password
 
-  cluster_name                      = "test-cluster-1"
+  cluster_name                      = "test-cluster-0"
   cluster_kubernetes_version        = "v1.26.6+rke2r1"
   cluster_image_name                = "jammy-server-cloudimg-prepared-3"
   cluster_controlplane_network_name = "TKG Management Network - 111"
