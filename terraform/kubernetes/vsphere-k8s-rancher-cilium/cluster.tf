@@ -59,7 +59,7 @@ resource "rancher2_cluster_v2" "tfcluster" {
   enable_network_policy = false
   rke_config {
     machine_pools {
-      name                         = "controlplane_pool"
+      name                         = "controlplane-pool"
       cloud_credential_secret_name = rancher2_cloud_credential.vsphere.id
       control_plane_role           = true
       etcd_role                    = false
@@ -71,7 +71,7 @@ resource "rancher2_cluster_v2" "tfcluster" {
       }
     }
     machine_pools {
-      name                         = "etcd_pool"
+      name                         = "etcd-pool"
       cloud_credential_secret_name = rancher2_cloud_credential.vsphere.id
       control_plane_role           = false
       etcd_role                    = true
@@ -83,7 +83,7 @@ resource "rancher2_cluster_v2" "tfcluster" {
       }
     }
     machine_pools {
-      name                         = "worker_pool"
+      name                         = "worker-pool"
       cloud_credential_secret_name = rancher2_cloud_credential.vsphere.id
       control_plane_role           = false
       etcd_role                    = false
