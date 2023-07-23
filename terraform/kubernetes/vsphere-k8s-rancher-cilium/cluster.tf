@@ -107,8 +107,8 @@ service-node-port-range: 30000-31000
 EOF
 
     upgrade_strategy {
-      max_surge       = "25%"
-      max_unavailable = "25%"
+      control_plane_concurrency = "25%"
+      worker_concurrency        = "25%"
     }
 
     etcd {
