@@ -56,7 +56,7 @@ resource "tls_private_key" "flux" {
   ecdsa_curve = "P256"
 }
 
-resource "github_repository_deploy_key" "this" {
+resource "github_repository_deploy_key" "flux-key" {
   title      = "Flux"
   repository = "infrastructure"
   key        = tls_private_key.flux.public_key_openssh
