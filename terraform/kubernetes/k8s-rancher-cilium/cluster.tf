@@ -8,19 +8,48 @@ resource "rancher2_cloud_credential" "vsphere" {
   }
 }
 
-resource "rancher2_machine_config_v2" "master_config" {
-  generate_name = "master-node"
+resource "rancher2_machine_config_v2" "controlplane_config" {
+  generate_name = "controlplane-node"
   vsphere_config {
     cfgparam      = ["disk.enableUUID=TRUE"]
-    cpu_count     = 4
+    cpu_count     = var.cluster_controlplane_cpu
     creation_type = "vm"
     clone_from    = var.cluster_image_name
-    datacenter    = "Homelab"
-    datastore     = "vsanDatastore"
-    //folder = ""
-    pool        = "FX2S/Resources"
-    memory_size = var.cluster_controlplane_memory
-    network     = ["${var.cluster_controlplane_network_name}"]
+    datacenter    = var.cluster_vmware_datacenter
+    datastore     = var.cluster_vmware_datastore
+    pool          = var.cluster_vmware_resource_pool
+    memory_size   = var.cluster_controlplane_memory
+    network       = ["${var.cluster_controlplane_network_name}"]
+  }
+}
+
+resource "rancher2_machine_config_v2" "etcd_config" {
+  generate_name = "etcd-node"
+  vsphere_config {
+    cfgparam      = ["disk.enableUUID=TRUE"]
+    cpu_count     = var.cluster_etcd_cpu
+    creation_type = "vm"
+    clone_from    = var.cluster_image_name
+    datacenter    = var.cluster_vmware_datacenter
+    datastore     = var.cluster_vmware_datastore
+    pool          = var.cluster_vmware_resource_pool
+    memory_size   = var.cluster_etcd_memory
+    network       = ["${var.cluster_etcd_network_name}"]
+  }
+}
+
+resource "rancher2_machine_config_v2" "worker_config" {
+  generate_name = "worker-node"
+  vsphere_config {
+    cfgparam      = ["disk.enableUUID=TRUE"]
+    cpu_count     = var.cluster_worker_cpu
+    creation_type = "vm"
+    clone_from    = var.cluster_image_name
+    datacenter    = var.cluster_vmware_datacenter
+    datastore     = var.cluster_vmware_datastore
+    pool          = var.cluster_vmware_resource_pool
+    memory_size   = var.cluster_worker_memory
+    network       = ["${var.cluster_worker_network_name}"]
   }
 }
 
@@ -30,15 +59,39 @@ resource "rancher2_cluster_v2" "tfcluster" {
   enable_network_policy = false
   rke_config {
     machine_pools {
-      name                         = "rkepool"
+      name                         = "controlplane_pool"
       cloud_credential_secret_name = rancher2_cloud_credential.vsphere.id
       control_plane_role           = true
-      etcd_role                    = true
-      worker_role                  = true
-      quantity                     = 3
+      etcd_role                    = false
+      worker_role                  = false
+      quantity                     = var.cluster_controlplane_count
       machine_config {
-        name = rancher2_machine_config_v2.master_config.name
-        kind = rancher2_machine_config_v2.master_config.kind
+        name = rancher2_machine_config_v2.controlplane_config.name
+        kind = rancher2_machine_config_v2.controlplane_config.kind
+      }
+    }
+    machine_pools {
+      name                         = "etcd_pool"
+      cloud_credential_secret_name = rancher2_cloud_credential.vsphere.id
+      control_plane_role           = false
+      etcd_role                    = true
+      worker_role                  = false
+      quantity                     = var.cluster_etcd_count
+      machine_config {
+        name = rancher2_machine_config_v2.etcd_config.name
+        kind = rancher2_machine_config_v2.etcd_config.kind
+      }
+    }
+    machine_pools {
+      name                         = "worker_pool"
+      cloud_credential_secret_name = rancher2_cloud_credential.vsphere.id
+      control_plane_role           = false
+      etcd_role                    = false
+      worker_role                  = true
+      quantity                     = var.cluster_worker_count
+      machine_config {
+        name = rancher2_machine_config_v2.worker_config.name
+        kind = rancher2_machine_config_v2.worker_config.kind
       }
     }
   }

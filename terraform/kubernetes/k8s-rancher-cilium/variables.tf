@@ -43,6 +43,22 @@ variable "cluster_kubernetes_version" {
   type = string
 }
 
+# VMware vars
+variable "cluster_vmware_datacenter" {
+  type    = string
+  default = ""
+}
+
+variable "cluster_vmware_datastore" {
+  type    = string
+  default = "vsanDatastore"
+}
+
+variable "cluster_vmware_resource_pool" {
+  type    = string
+  default = ""
+}
+
 # Worker node vars
 variable "cluster_worker_count" {
   type    = number
