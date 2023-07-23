@@ -34,6 +34,6 @@ provider "flux" {
     token                  = module.vsphere-k8s-rancher-cilium.kubeconfig-token
   }
   git = {
-    url = "git@github.com:Haibread/infrastructure.git"
+    url = "ssh://git@github.com:Haibread/infrastructure.git"
   }
 }
