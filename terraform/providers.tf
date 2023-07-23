@@ -35,5 +35,8 @@ provider "flux" {
   }
   git = {
     url = "https://github.com/Haibread/infrastructure.git"
+    http = {
+      allow_insecure_http = false
+    }
   }
 }
