@@ -1,17 +1,14 @@
 # Authentication
 variable "rancher_url" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "rancher_access_key" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "rancher_secret_key" {
-  type      = string
-  default   = ""
+  type = string
   sensitive = true
 }
 
