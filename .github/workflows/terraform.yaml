@@ -64,7 +64,7 @@ jobs:
 
     - name: Terraform Validate
       id: validate
-      run: terraform validate -var-file ${{ env.TF_VARS_FILE }}
+      run: terraform validate
       working-directory: ./terraform
 
     - name: Terraform Plan
