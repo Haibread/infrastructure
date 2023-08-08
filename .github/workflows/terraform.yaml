@@ -135,7 +135,7 @@ jobs:
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -input=false tf.plan -var-file ${{ env.TF_VARS_FILE }}
+      run: terraform apply -input=false tf.plan
       working-directory: ./terraform
       shell: bash
       env:
