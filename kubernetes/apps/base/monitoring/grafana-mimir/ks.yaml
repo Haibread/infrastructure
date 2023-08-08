@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-grafana-mimir
+  namespace: monitoring
+spec:
+  path: "./app/kustomization.yaml"
+  prune: true
+  sourceRef:
+    kind: HelmRepository
+    name: grafana
+  wait: false
+  interval: 10m
+  retryInterval: 1m
+  timeout: 5m
