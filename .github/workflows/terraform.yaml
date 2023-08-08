@@ -28,7 +28,7 @@ jobs:
 
     env:
       TF_WORKSPACE: ${{ matrix.workspace }}
-      TF_VARS_FILE: ./terraform/vars/${{ matrix.workspace }}.tfvars
+      TF_VARS_FILE: ./vars/${{ matrix.workspace }}.tfvars
 
 
     steps:
