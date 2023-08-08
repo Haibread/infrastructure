@@ -82,7 +82,7 @@ jobs:
 
     - name: Terraform Show
       id: show
-      run: terraform show -no-color tf.plan 2>&1 -var-file ${{ env.TF_VARS_FILE }} > /tmp/plan.txt
+      run: terraform show -no-color tf.plan -var-file ${{ env.TF_VARS_FILE }} 2>&1 > /tmp/plan.txt
       working-directory: ./terraform
       env:
         TF_VAR_vsphere_user : ${{ secrets.VSPHERE_USER }}
