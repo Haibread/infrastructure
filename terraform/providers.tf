@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket                      = "homelab-s3-terraforming"
-    key                         = "terraform.tfstate"
+    key                         = "terraform-${var.environment}.tfstate"
     region                      = "gra"
     endpoint                    = "s3.gra.perf.cloud.ovh.net"
     skip_credentials_validation = true

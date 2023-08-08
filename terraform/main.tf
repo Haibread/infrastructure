@@ -1,5 +1,5 @@
 module "vsphere-k8s-rancher-cilium" {
-  source = "./kubernetes/vsphere-k8s-rancher-cilium"
+  source = "./modules/kubernetes/vsphere-k8s-rancher-cilium"
 
   rancher_url             = "https://192.168.0.5:6587"
   vsphere_vcenter_address = "vcenter.homelab.lan"
@@ -11,9 +11,9 @@ module "vsphere-k8s-rancher-cilium" {
   cluster_vmware_datacenter    = "Homelab"
   cluster_vmware_resource_pool = "FX2S/Resources"
 
-  cluster_name               = "test-cluster-0"
-  cluster_kubernetes_version = "v1.26.6+rke2r1"
-  cluster_image_name         = "jammy-server-cloudimg-prepared-3"
+  cluster_name               = "${var.environment}-k8s-rancher-cilium"
+  cluster_kubernetes_version = var.kubernetes_version
+  cluster_image_name         = var.kubernetes_image_name
 
   cluster_controlplane_cpu          = 2
   cluster_controlplane_memory       = 4096

@@ -18,9 +18,19 @@ permissions:
 
 jobs:
   terraform:
-    container : ubuntu:latest
+    strategy:
+      matrix: 
+        workspace: [testing]
+      
+    container: ubuntu:latest
     runs-on: [self-hosted, linux, x64]
     name: Terraform
+
+    env:
+      TF_WORKSPACE: ${{ matrix.workspace }}
+      TF_VARS_FILE: terraform/vars/${{ matrix.workspace }}.tfvars
+
+
     steps:
 
     - uses: actions/checkout@v3
@@ -41,7 +51,7 @@ jobs:
       
     - name: Terraform Init
       id: init
-      run: terraform init -upgrade
+      run: terraform init -upgrade -var-file ${{ env.TF_VARS_FILE }}
       working-directory: ./terraform
       env:
         TF_VAR_vsphere_user : ${{ secrets.VSPHERE_USER }}
@@ -54,12 +64,12 @@ jobs:
 
     - name: Terraform Validate
       id: validate
-      run: terraform validate
+      run: terraform validate -var-file ${{ env.TF_VARS_FILE }}
       working-directory: ./terraform
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -input=false -no-color -out tf.plan
+      run: terraform plan -input=false -no-color -out tf.plan -var-file ${{ env.TF_VARS_FILE }}
       working-directory: ./terraform
       env:
         TF_VAR_vsphere_user : ${{ secrets.VSPHERE_USER }}
@@ -72,7 +82,7 @@ jobs:
 
     - name: Terraform Show
       id: show
-      run: terraform show -no-color tf.plan 2>&1 > /tmp/plan.txt
+      run: terraform show -no-color tf.plan 2>&1 -var-file ${{ env.TF_VARS_FILE }} > /tmp/plan.txt
       working-directory: ./terraform
       env:
         TF_VAR_vsphere_user : ${{ secrets.VSPHERE_USER }}
@@ -125,7 +135,7 @@ jobs:
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -input=false tf.plan
+      run: terraform apply -input=false tf.plan -var-file ${{ env.TF_VARS_FILE }}
       working-directory: ./terraform
       shell: bash
       env:

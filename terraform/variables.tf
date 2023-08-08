@@ -1,3 +1,4 @@
+// Declared in Actions workflow
 variable "rancher_access_key" {
   type = string
 }
@@ -29,3 +30,16 @@ variable "github_token" {
 //variable "github_repository" {
 //  type = string
 //}
+
+// Vars
+variable "environment"{
+  type = string
+}
+
+variable "kubernetes_version" {
+  type = string 
+}
+
+variable "kubernetes_image_name" {
+  type = string
+}
