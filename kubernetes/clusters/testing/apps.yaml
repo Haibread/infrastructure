@@ -11,5 +11,5 @@ spec:
     name: flux-system
   path: ./kubernetes/apps/testing
   prune: true
-  wait: true
+  wait: false
   timeout: 5m0s
