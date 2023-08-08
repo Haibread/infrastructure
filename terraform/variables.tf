@@ -32,12 +32,12 @@ variable "github_token" {
 //}
 
 // Vars
-variable "environment"{
+variable "environment" {
   type = string
 }
 
 variable "kubernetes_version" {
-  type = string 
+  type = string
 }
 
 variable "kubernetes_image_name" {
