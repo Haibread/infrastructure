@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-grafana-mimir
   namespace: monitoring
 spec:
-  path: "./kubernetes/apps/base/monitoring/grafana-mimir/app/kustomization.yaml"
+  path: "./kubernetes/apps/base/monitoring/grafana-mimir/app/"
   prune: true
   sourceRef:
     kind: HelmRepository
