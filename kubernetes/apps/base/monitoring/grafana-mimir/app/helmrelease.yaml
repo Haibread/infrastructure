@@ -4,7 +4,6 @@ metadata:
   name: grafana-mimir
   namespace: monitoring
 spec:
-  releasename: grafana-mimir
   chart:
     spec:
       chart: mimir-distributed
