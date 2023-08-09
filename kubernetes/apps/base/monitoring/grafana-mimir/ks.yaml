@@ -8,8 +8,8 @@ spec:
   path: "./kubernetes/apps/base/monitoring/grafana-mimir/app/"
   prune: true
   sourceRef:
-    kind: HelmRepository
-    name: grafana
+    kind: GitRepository
+    name: flux-system
   wait: false
   interval: 10m
   retryInterval: 1m
