@@ -13,5 +13,5 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
-      valuesFiles:
-        - values.yaml
+  values:
+    replicas: 2
