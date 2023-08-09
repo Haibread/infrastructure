@@ -4,6 +4,7 @@ metadata:
   name: grafana-mimir
   namespace: monitoring
 spec:
+  interval: 5m
   chart:
     spec:
       chart: mimir-distributed
@@ -14,4 +15,3 @@ spec:
         namespace: flux-system
       valuesFiles:
         - values.yaml
-      interval: 5m
