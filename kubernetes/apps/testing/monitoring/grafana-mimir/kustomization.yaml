@@ -2,4 +2,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../../../base/monitoring/grafana-mimir/ks.yaml
+  - kubernetes/apps/base/monitoring/grafana-mimir/ks.yaml
