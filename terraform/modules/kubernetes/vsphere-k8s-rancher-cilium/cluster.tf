@@ -94,6 +94,11 @@ resource "rancher2_cluster_v2" "tfcluster" {
         kind = rancher2_machine_config_v2.worker_config.kind
       }
     }
+    machine_selector_config {
+      config = {
+        cloud-provider-name = "vsphere"   
+        }
+      }
 
     machine_global_config = <<EOF
 cluster-cidr: 10.111.0.0/16
