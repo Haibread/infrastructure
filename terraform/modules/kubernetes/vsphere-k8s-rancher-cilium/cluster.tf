@@ -96,7 +96,7 @@ resource "rancher2_cluster_v2" "tfcluster" {
     }
     machine_selector_config {
       config = {
-        cloud-provider-name = "vsphere"
+        cloud-provider-name = "rancher-vsphere"
       }
     }
 
