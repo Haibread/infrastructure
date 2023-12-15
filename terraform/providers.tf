@@ -3,18 +3,18 @@ terraform {
     bucket                      = "homelab-s3-terraforming"
     key                         = "terraform.tfstate"
     region                      = "gra"
-    endpoint                    = "s3.gra.perf.cloud.ovh.net"
+    endpoints                   = {s3 = "https://s3.gra.perf.cloud.ovh.net"}
     skip_credentials_validation = true
     skip_region_validation      = true
   }
   required_providers {
     helm = {
       source  = "hashicorp/helm"
-      version = "2.3.0"
+      version = ">=2.3.0"
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "1.0.1"
+      version = ">=1.0.1"
     }
     github = {
       source  = "integrations/github"
