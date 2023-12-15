@@ -11,7 +11,7 @@ module "vsphere-k8s-rancher-cilium" {
   cluster_vmware_datacenter    = "Homelab"
   cluster_vmware_resource_pool = "FX2S/Resources"
 
-  cluster_name               = "${var.environment}-k8s-rancher-cilium"
+  cluster_name               = "${var.environment}-k8s-rancher-cilium-cluster"
   cluster_kubernetes_version = var.kubernetes_version
   cluster_image_name         = var.kubernetes_image_name
 
