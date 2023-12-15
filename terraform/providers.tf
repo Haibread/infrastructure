@@ -3,7 +3,7 @@ terraform {
     bucket                      = "homelab-s3-terraforming"
     key                         = "terraform.tfstate"
     region                      = "gra"
-    endpoints                   = {s3 = "https://s3.gra.perf.cloud.ovh.net"}
+    endpoints                   = { s3 = "https://s3.gra.perf.cloud.ovh.net" }
     skip_credentials_validation = true
     skip_region_validation      = true
   }
