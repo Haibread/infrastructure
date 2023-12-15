@@ -170,7 +170,7 @@ rke2-cilium:
     ui:
       enabled: true
   image:
-    tag: v1.13.4
+    tag: v1.14.2
   ingressController:
     enabled: true
   k8sServiceHost: 127.0.0.1
@@ -178,10 +178,10 @@ rke2-cilium:
   kubeProxyReplacement: strict
   operator:
     image:
-      tag: v1.13.4
+      tag: v1.14.2
   preflight:
     image:
-      tag: v1.13.4
+      tag: v1.14.2
 EOF
   }
 }
