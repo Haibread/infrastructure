@@ -57,6 +57,7 @@ resource "rancher2_cluster_v2" "tfcluster" {
   name                  = var.cluster_name
   kubernetes_version    = var.cluster_kubernetes_version
   enable_network_policy = false
+  depends_on            = [rancher2_cloud_credential.vsphere]
   rke_config {
     machine_pools {
       name                         = "controlplane-pool"
