@@ -7,6 +7,8 @@ terraform {
     skip_credentials_validation = true
     skip_region_validation      = true
     skip_requesting_account_id  = true
+    skip_metadata_api_check     = true
+    skip_s3_checksum            = true #https://github.com/hashicorp/terraform/issues/34053
   }
   required_providers {
     helm = {
