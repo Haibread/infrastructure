@@ -1,0 +1,5 @@
+credentials.ps1
+credentials.sh
+.terraform
+terraform.tfstate
+.terraform.lock.hcl
