@@ -31,10 +31,10 @@ resource "vsphere_virtual_machine" "test-machine" {
   name             = "test-machine"
   num_cpus         = 1
   memory           = 1024
-  resource_pool_id = data.vsphere_compute_cluster.FX2S
-  datastore_id     = data.vsphere_datastore.vsanDatastore
+  resource_pool_id = data.vsphere_compute_cluster.FX2S.id
+  datastore_id     = data.vsphere_datastore.vsanDatastore.id
   network_interface {
-    network_id = data.vsphere_network.DPG-Servers-10
+    network_id = data.vsphere_network.DPG-Servers-10.id
   }
   disk {
     label = "disk0"
