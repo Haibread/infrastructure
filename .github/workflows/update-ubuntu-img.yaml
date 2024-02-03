@@ -16,7 +16,7 @@ jobs:
         run: chmod +x scripts/update-ubuntu-ova.sh
 
       - name: Run the script
-        run: bash scripts/update-ubuntu-ova
+        run: bash scripts/update-ubuntu-ova.sh
         env:
           GOVC_URL: "https://vcneter.homelab.lan"
           GOVC_USERNAME: ${{ secrets.VSPHERE_USER }}
