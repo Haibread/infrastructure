@@ -28,19 +28,19 @@ data "vsphere_content_library_item" "jammy-server" {
 }
 
 resource "vsphere_virtual_machine" "test-machine" {
-  name     = "test-machine"
-  num_cpus = 1
-  memory   = 1024
+  name             = "test-machine"
+  num_cpus         = 1
+  memory           = 1024
   resource_pool_id = data.vsphere_compute_cluster.FX2S
-  datastore_id = data.vsphere_datastore.vSanDatastore
+  datastore_id     = data.vsphere_datastore.vSanDatastore
   network_interface {
     network_id = data.vsphere_network.DPG-Servers-10
   }
   disk {
     label = "disk0"
-    size = 20
+    size  = 20
   }
-  clone{
+  clone {
     template_uuid = data.vsphere_content_library_item.jammy-server
     customize {
       network_interface {
