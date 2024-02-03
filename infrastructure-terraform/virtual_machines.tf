@@ -40,6 +40,9 @@ resource "vsphere_virtual_machine" "test-machine" {
     label = "disk0"
     size  = 20
   }
+  cdrom {
+    client_device = true
+  }
   clone {
     template_uuid = data.vsphere_content_library_item.jammy-server.id
     customize {
