@@ -45,7 +45,7 @@ resource "vsphere_virtual_machine" "test-machine" {
     customize {
       linux_options {
         host_name = "test-vm"
-        domain = "homelab.lan"
+        domain    = "homelab.lan"
       }
       network_interface {
         ipv4_address = "10.0.10.2"
