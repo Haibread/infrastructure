@@ -61,7 +61,7 @@ provider "github" {
 provider "vsphere" {
   user                 = var.vsphere_user
   password             = var.vsphere_password
-  vsphere_server       = "https://vcenter.homelab.lan"
+  vsphere_server       = "vcenter.homelab.lan"
   allow_unverified_ssl = true
 }
 
