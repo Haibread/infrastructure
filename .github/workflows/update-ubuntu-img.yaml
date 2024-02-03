@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Setup environement
-        run: apt update -y && apt install curl tar && curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" | tar -C /usr/local/bin -xvzf - govc
+        run: apt update -y && apt install -y curl tar && curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" | tar -C /usr/local/bin -xvzf - govc
 
       - name: Make the script file executable
         run: chmod +x scripts/update-ubuntu-ova.sh
