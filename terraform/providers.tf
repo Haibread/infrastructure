@@ -23,6 +23,10 @@ terraform {
       source  = "integrations/github"
       version = ">=5.20.0"
     }
+    vsphere = {
+      source = "hashicorp/vsphere"
+      version = "2.6.1"
+    }
   }
 }
 
@@ -52,6 +56,13 @@ provider "flux" {
 provider "github" {
   owner = "Haibread"
   token = var.github_token
+}
+
+provider "vsphere" {
+  user                 = var.vsphere_user
+  password             = var.vsphere_password
+  vsphere_server       = "https://vcenter.homelab.lan"
+  allow_unverified_ssl = true
 }
 
 resource "tls_private_key" "flux" {
