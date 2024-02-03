@@ -10,15 +10,21 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Setup environement
-        run: curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" | tar -C /usr/local/bin -xvzf - govc
+        run: apt update -y && apt install -y curl tar jq && curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" | tar -C /usr/local/bin -xvzf - govc
 
       - name: Make the script file executable
         run: chmod +x scripts/update-ubuntu-ova.sh
 
       - name: Run the script
+<<<<<<< HEAD
         run: bash scripts/update-ubuntu-ova
         env:
           GOVC_URL: "https://vcneter.homelab.lan"
+=======
+        run: bash scripts/update-ubuntu-ova.sh
+        env:
+          GOVC_URL: "https://vcenter.homelab.lan"
+>>>>>>> d2e7460b8e81bd7e4e751003179ba1b8993fdbdb
           GOVC_USERNAME: ${{ secrets.VSPHERE_USER }}
           GOVC_PASSWORD: ${{ secrets.VSPHERE_PASSWORD }}
           GOVC_INSECURE: "true"
