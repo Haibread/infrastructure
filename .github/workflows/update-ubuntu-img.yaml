@@ -18,7 +18,7 @@ jobs:
       - name: Run the script
         run: bash scripts/update-ubuntu-ova.sh
         env:
-          GOVC_URL: "https://vcneter.homelab.lan"
+          GOVC_URL: "https://vcenter.homelab.lan"
           GOVC_USERNAME: ${{ secrets.VSPHERE_USER }}
           GOVC_PASSWORD: ${{ secrets.VSPHERE_PASSWORD }}
           GOVC_INSECURE: "true"
