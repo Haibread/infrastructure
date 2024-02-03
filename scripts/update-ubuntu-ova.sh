@@ -2,9 +2,9 @@
 
 TARGET_LIBRARY_NAME=/ubuntu-cloudimg/
 TARGET_VM_NAME="jammy-server-cloudimg-amd64.ova"
-IMAGE_LIST=$(govc library.info -json $TARGET_LIBRARY_NAME)
+IMAGE_LIST=$(govc library.info -json $TARGET_LIBRARY_NAME | jq)
 
-if echo "$IMAGE_LIST" | jq -r ". | contains([\"$TARGET_VM_NAME\"])"; then
+if grep-q "$IMAGE_LIST" <<< "$TARGET_VM_NAME" ; then
     govc library.rm $TARGET_LIBRARY_NAME$TARGET_VM_NAME
 else
     echo "VM $TARGET_VM_NAME not found."
