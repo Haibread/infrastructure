@@ -41,7 +41,7 @@ resource "vsphere_virtual_machine" "test-machine" {
     size  = 20
   }
   clone {
-    template_uuid = data.vsphere_content_library_item.jammy-server
+    template_uuid = data.vsphere_content_library_item.jammy-server.id
     customize {
       network_interface {
         ipv4_address = "10.0.10.2"
