@@ -44,12 +44,12 @@ jobs:
     - name: Terraform Fmt
       id: fmt
       run: terraform fmt -check -recursive
-      working-directory: ./terraform
+      working-directory: ./terraform-infrastructure
       
     - name: Terraform Init
       id: init
       run: terraform init -upgrade -var-file ${{ env.TF_VARS_FILE }}
-      working-directory: ./terraform
+      working-directory: ./terraform-infrastructure
       env:
         TF_VAR_vsphere_user : ${{ secrets.VSPHERE_USER }}
         TF_VAR_vsphere_password : ${{ secrets.VSPHERE_PASSWORD }}
@@ -76,12 +76,12 @@ jobs:
     - name: Terraform Validate
       id: validate
       run: terraform validate
-      working-directory: ./terraform
+      working-directory: ./terraform-infrastructure
 
     - name: Terraform Plan
       id: plan
       run: terraform plan -input=false -no-color -out tf.plan -var-file ${{ env.TF_VARS_FILE }}
-      working-directory: ./terraform
+      working-directory: ./terraform-infrastructure
       env:
         TF_VAR_vsphere_user : ${{ secrets.VSPHERE_USER }}
         TF_VAR_vsphere_password : ${{ secrets.VSPHERE_PASSWORD }}
@@ -94,7 +94,7 @@ jobs:
     - name: Terraform Show
       id: show
       run: terraform show -no-color tf.plan 2>&1 > /tmp/plan.txt
-      working-directory: ./terraform
+      working-directory: ./terraform-infrastructure
       env:
         TF_VAR_vsphere_user : ${{ secrets.VSPHERE_USER }}
         TF_VAR_vsphere_password : ${{ secrets.VSPHERE_PASSWORD }}
@@ -147,7 +147,7 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -input=false tf.plan
-      working-directory: ./terraform
+      working-directory: ./terraform-infrastructure
       shell: bash
       env:
         TF_VAR_vsphere_user : ${{ secrets.VSPHERE_USER }}
