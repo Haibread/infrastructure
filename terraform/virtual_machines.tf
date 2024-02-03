@@ -2,8 +2,8 @@ data "vsphere_datacenter" "datacenter" {
   name = "Homelab"
 }
 
-data "vsphere_datastore" "vSanDatastore" {
-  name          = "vSanDatastore"
+data "vsphere_datastore" "vsanDatastore" {
+  name          = "vsanDatastore"
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
