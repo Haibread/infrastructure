@@ -1,0 +1,25 @@
+name: "Update Ubuntu Image on Content Library"
+on:
+  workflow_dispatch:
+
+jobs:
+  update-img:
+    container: ubuntu:latest
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup environement
+        run: curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" | tar -C /usr/local/bin -xvzf - govc
+
+      - name: Make the script file executable
+        run: chmod +x scripts/update-ubuntu-ova.sh
+
+      - name: Run the script
+        run: bash scripts/update-ubuntu-ova
+        env:
+          GOVC_URL: "https://vcneter.homelab.lan"
+          GOVC_USERNAME: ${{ secrets.VSPHERE_USER }}
+          GOVC_PASSWORD: ${{ secrets.VSPHERE_PASSWORD }}
+          GOVC_INSECURE: "true"
+        
