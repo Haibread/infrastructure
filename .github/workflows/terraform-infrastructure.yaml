@@ -4,12 +4,12 @@ on:
     branches:
     - main
     paths:
-    - 'infrastructure/**'
+    - 'infrastructure-terraform/**'
   pull_request:
     branches:
     - main
     paths:
-    - 'infrastructure/**'
+    - 'infrastructure-terraform/**'
 
 permissions:
   contents: read
