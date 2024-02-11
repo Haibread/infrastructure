@@ -111,6 +111,7 @@ jobs:
     container: ubuntu:latest
     runs-on: [self-hosted, linux, x64]
     name: Ansible
+    needs: terraform
 
     steps:
 
