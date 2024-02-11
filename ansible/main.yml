@@ -1,0 +1,11 @@
+---
+- name: main
+  hosts: linux
+  become: yes
+  tasks:
+    - name: ensure users are created
+      user:
+        name: haibread
+        state: present
+        groups: sudo
+        append: yes
