@@ -46,10 +46,10 @@ resource "vsphere_virtual_machine" "test-machine" {
   clone {
     template_uuid = data.vsphere_content_library_item.jammy-server.id
     customize {
-      # linux_options {
-      #   host_name = "test-vm"
-      #   domain    = "homelab.lan"
-      # }
+      linux_options {
+        host_name = "test-vm"
+        domain    = "homelab.lan"
+      }
       network_interface {
         ipv4_address = "10.0.10.2"
         ipv4_netmask = "24"
