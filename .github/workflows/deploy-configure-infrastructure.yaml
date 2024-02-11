@@ -105,3 +105,17 @@ jobs:
         AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY : ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         TF_VAR_github_token : ${{ secrets.PAT_TOKEN }}
+  
+  ansible:
+
+    container: ubuntu:latest
+    runs-on: [self-hosted, linux, x64]
+    name: Ansible
+
+    steps:
+
+    - name: Setup environment
+      run : apt update -y && apt install -y curl git ansible
+
+    - name: Run Ansible playbook
+      run: ansible-playbook ansible/main.yml -i inventory/homelab.ini
