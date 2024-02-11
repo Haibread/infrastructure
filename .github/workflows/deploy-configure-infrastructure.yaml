@@ -113,10 +113,13 @@ jobs:
     name: Ansible
     needs: terraform
 
+    env:
+      DEBIAN_FRONTEND: noninteractive
+
     steps:
 
     - name: Setup environment
-      run : DEBIAN_FRONTEND=noninteractive apt update -y && apt install -y curl git ansible
+      run : apt update -y && apt install -y curl git ansible
 
     - name: Run Ansible playbook
       run: ansible-playbook ansible/main.yml -i inventory/homelab.ini
