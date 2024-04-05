@@ -30,6 +30,6 @@ module "vsphere-k8s-rancher-cilium" {
   cluster_worker_cpu          = 2
   cluster_worker_memory       = 4096
   cluster_worker_disk         = 20
-  cluster_worker_count        = 1
+  cluster_worker_count        = 2
   cluster_worker_network_name = "TKG Workload network - 112"
 }
