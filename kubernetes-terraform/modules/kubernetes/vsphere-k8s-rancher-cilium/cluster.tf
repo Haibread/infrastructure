@@ -123,32 +123,32 @@ EOF
     }
 
     chart_values = <<EOF
-#rancher-vsphere-cpi:
-#  vCenter:
-#    datacenters: ${var.cluster_vmware_datacenter}
-#    host: ${var.vsphere_vcenter_address}
-#    password: ${var.vsphere_password}
-#    username: ${var.vsphere_user}
-#rancher-vsphere-csi:
-#  asyncQueryVolume:
-#    enabled: true
-#  csiAuthCheck:
-#    enabled: true
-#  improvedCsiIdempotency:
-#    enabled: true
-#  improvedVolumeTopology:
-#    enabled: true
-#  onlineVolumeExtend:
-#    enabled: true
-#  storageClass:
-#    allowVolumeExpansion: true
-#  triggerCsiFullsync:
-#    enabled: true
-#  vCenter:
-#    datacenters: ${var.cluster_vmware_datacenter}
-#    host: ${var.vsphere_vcenter_address}
-#    password: ${var.vsphere_password}
-#    username: ${var.vsphere_user}
+rancher-vsphere-cpi:
+  vCenter:
+    datacenters: ${var.cluster_vmware_datacenter}
+    host: ${var.vsphere_vcenter_address}
+    password: ${var.vsphere_password}
+    username: ${var.vsphere_user}
+rancher-vsphere-csi:
+  asyncQueryVolume:
+    enabled: true
+  csiAuthCheck:
+    enabled: true
+  improvedCsiIdempotency:
+    enabled: true
+  improvedVolumeTopology:
+    enabled: true
+  onlineVolumeExtend:
+    enabled: true
+  storageClass:
+    allowVolumeExpansion: true
+  triggerCsiFullsync:
+    enabled: true
+  vCenter:
+    datacenters: ${var.cluster_vmware_datacenter}
+    host: ${var.vsphere_vcenter_address}
+    password: ${var.vsphere_password}
+    username: ${var.vsphere_user}
 rke2-cilium:
   bgpControlPlane:
     enabled: true
