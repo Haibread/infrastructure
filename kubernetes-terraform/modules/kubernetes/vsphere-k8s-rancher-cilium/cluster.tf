@@ -104,7 +104,7 @@ resource "rancher2_cluster_v2" "tfcluster" {
     machine_global_config = <<EOF
 cluster-cidr: 10.111.0.0/16
 cluster-dns: 10.112.0.10
-cluster-domain: cluster.lan
+#cluster-domain: cluster.lan
 cni: cilium
 disable-kube-proxy: true
 etcd-expose-metrics: false
@@ -123,32 +123,32 @@ EOF
     }
 
     chart_values = <<EOF
-rancher-vsphere-cpi:
-  vCenter:
-    datacenters: ${var.cluster_vmware_datacenter}
-    host: ${var.vsphere_vcenter_address}
-    password: ${var.vsphere_password}
-    username: ${var.vsphere_user}
-rancher-vsphere-csi:
-  asyncQueryVolume:
-    enabled: true
-  csiAuthCheck:
-    enabled: true
-  improvedCsiIdempotency:
-    enabled: true
-  improvedVolumeTopology:
-    enabled: true
-  onlineVolumeExtend:
-    enabled: true
-  storageClass:
-    allowVolumeExpansion: true
-  triggerCsiFullsync:
-    enabled: true
-  vCenter:
-    datacenters: ${var.cluster_vmware_datacenter}
-    host: ${var.vsphere_vcenter_address}
-    password: ${var.vsphere_password}
-    username: ${var.vsphere_user}
+#rancher-vsphere-cpi:
+#  vCenter:
+#    datacenters: ${var.cluster_vmware_datacenter}
+#    host: ${var.vsphere_vcenter_address}
+#    password: ${var.vsphere_password}
+#    username: ${var.vsphere_user}
+#rancher-vsphere-csi:
+#  asyncQueryVolume:
+#    enabled: true
+#  csiAuthCheck:
+#    enabled: true
+#  improvedCsiIdempotency:
+#    enabled: true
+#  improvedVolumeTopology:
+#    enabled: true
+#  onlineVolumeExtend:
+#    enabled: true
+#  storageClass:
+#    allowVolumeExpansion: true
+#  triggerCsiFullsync:
+#    enabled: true
+#  vCenter:
+#    datacenters: ${var.cluster_vmware_datacenter}
+#    host: ${var.vsphere_vcenter_address}
+#    password: ${var.vsphere_password}
+#    username: ${var.vsphere_user}
 rke2-cilium:
   bgpControlPlane:
     enabled: true
