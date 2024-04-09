@@ -109,7 +109,7 @@ cni: cilium
 disable-kube-proxy: true
 etcd-expose-metrics: false
 service-cidr: 10.112.0.0/16
-service-node-port-range: 30000-31000
+#service-node-port-range: 30000-31000
 EOF
 
     upgrade_strategy {

@@ -1,3 +1,3 @@
 environment           = "production"
-kubernetes_version    = "v1.27.7+rke2r2"
-kubernetes_image_name = "jammy-server-cloudimg-amd64"
+kubernetes_version    = "v1.27.12+rke2r1"
+kubernetes_image_name = "Ubuntu-2404-cloudimg"
