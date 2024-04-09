@@ -15,21 +15,21 @@ module "vsphere-k8s-rancher-cilium" {
   cluster_kubernetes_version = var.kubernetes_version
   cluster_image_name         = var.kubernetes_image_name
 
-  cluster_controlplane_cpu          = 8
-  cluster_controlplane_memory       = 4096
-  cluster_controlplane_disk         = 20
-  cluster_controlplane_count        = 1
+  cluster_controlplane_cpu          = var.cluster_controlplane_cpu
+  cluster_controlplane_memory       = var.cluster_controlplane_memory
+  cluster_controlplane_disk         = var.cluster_controlplane_disk
+  cluster_controlplane_count        = var.cluster_controlplane_count
   cluster_controlplane_network_name = "TKG Management Network - 111"
 
-  cluster_etcd_cpu          = 8
-  cluster_etcd_memory       = 4096
-  cluster_etcd_disk         = 20
-  cluster_etcd_count        = 1
+  cluster_etcd_cpu          = var.cluster_etcd_cpu
+  cluster_etcd_memory       = var.cluster_etcd_memory
+  cluster_etcd_disk         = var.cluster_etcd_disk
+  cluster_etcd_count        = var.cluster_etcd_count
   cluster_etcd_network_name = "TKG Management Network - 111"
 
-  cluster_worker_cpu          = 8
-  cluster_worker_memory       = 4096
-  cluster_worker_disk         = 20
-  cluster_worker_count        = 1
+  cluster_worker_cpu          = var.cluster_worker_cpu
+  cluster_worker_memory       = var.cluster_worker_memory
+  cluster_worker_disk         = var.cluster_worker_disk
+  cluster_worker_count        = var.cluster_worker_count
   cluster_worker_network_name = "TKG Workload network - 112"
 }
