@@ -38,41 +38,9 @@ provider "helm" {
   }
 }
 
-provider "flux" {
-  kubernetes = {
-    host                   = module.vsphere-k8s-rancher-cilium.cluster-endpoint
-    cluster_ca_certificate = base64decode(module.vsphere-k8s-rancher-cilium.certificate-authority-data)
-    token                  = module.vsphere-k8s-rancher-cilium.kubeconfig-token
-  }
-  git = {
-    url = "ssh://git@github.com/Haibread/infrastructure.git"
-    ssh = {
-      username    = "git"
-      private_key = tls_private_key.flux.private_key_pem
-    }
-  }
-}
-
-provider "github" {
-  owner = "Haibread"
-  token = var.github_token
-}
-
 provider "vsphere" {
   user                 = var.vsphere_user
   password             = var.vsphere_password
   vsphere_server       = "vcenter.homelab.lan"
   allow_unverified_ssl = true
-}
-
-resource "tls_private_key" "flux" {
-  algorithm   = "ECDSA"
-  ecdsa_curve = "P256"
-}
-
-resource "github_repository_deploy_key" "flux-key" {
-  title      = "Flux"
-  repository = "infrastructure"
-  key        = tls_private_key.flux.public_key_openssh
-  read_only  = "false"
 }
