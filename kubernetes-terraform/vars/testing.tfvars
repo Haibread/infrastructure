@@ -1,5 +1,5 @@
 environment           = "testing"
-kubernetes_version    = "v1.27.12+rke2r1"
+kubernetes_version    = "v1.28.8+rke2r1"
 kubernetes_image_name = "Ubuntu-2404-cloudimg"
 
 #nodes
