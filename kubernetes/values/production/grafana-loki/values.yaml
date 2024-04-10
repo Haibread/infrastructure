@@ -58,6 +58,7 @@ ingester:
   persistence:
     enabled: true
   replicas: 10
+  maxUnavailable: 2
   extraArgs:
     - '-config.expand-env=true'
   extraEnv:
