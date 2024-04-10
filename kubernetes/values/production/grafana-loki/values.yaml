@@ -61,12 +61,12 @@ ingester:
   maxUnavailable: 2
   affinity: |
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
+      preferredDuringSchedulingIgnoredDuringExecution:
         - labelSelector:
             matchLabels:
               {{- include "loki.ingesterSelectorLabels" . | nindent 10 }}
           topologyKey: kubernetes.io/hostname
-      requiredDuringSchedulingIgnoredDuringExecution:
+      preferredDuringSchedulingIgnoredDuringExecution:
         - weight: 100
           podAffinityTerm:
             labelSelector:
