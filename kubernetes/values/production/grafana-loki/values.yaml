@@ -59,6 +59,13 @@ ingester:
     enabled: true
   replicas: 10
   maxUnavailable: 2
+  topologySpreadConstraints: |
+    - maxSkew: 2
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          {{- include "loki.ingesterSelectorLabels" . | nindent 6 }}
   extraArgs:
     - '-config.expand-env=true'
   extraEnv:
