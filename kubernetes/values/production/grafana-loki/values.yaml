@@ -33,7 +33,7 @@ loki:
       compactor_address: http://{{ include "loki.compactorFullname" . }}:3100
       storage:
         s3:
-          bucketnames: "minio.homelab.lan"
+          bucketnames: "loki-chunks"
           region: "us-east-1"
           access_key_id: "${S3_LOKI_ACCESS_KEY_ID}"
           secret_access_key: "${S3_LOKI_SECRET_ACCESS_KEY}"
