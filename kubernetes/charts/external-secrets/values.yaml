@@ -2,7 +2,7 @@ secretStore:
   region: "fr-par"
   projectId: 99e18c2e-54fa-4f12-b266-4d18f023e1a8
   accessKey: 
-    value: DTB057kHy8ioc79GU5m2
+    value: SCW9QWJTFWPXAKBPF4T5
   secretKey:
     secretRef:
       name: scw-secrets-store-secret-key
