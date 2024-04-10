@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-loki
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
+spec:
+  project: default
+  sources:
+  - repoURL: https://grafana.github.io/helm-charts
+    targetRevision: "0.78.4"
+    chart: loki-distributed
+    helm:
+      valueFiles:
+      - $values/kubernetes/values/production/grafana-loki/values.yaml
+  - repoURL: https://github.com/Haibread/infrastructure.git
+    targetRevision: "HEAD"
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: grafana-loki
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - ServerSideApply=true #Needed for CRDs

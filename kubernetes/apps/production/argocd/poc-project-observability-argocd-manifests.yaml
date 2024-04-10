@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production-argocd-common
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    name: in-cluster
+  project: production-argocd
+  source:
+    repoURL: https://github.com/Haibread/infrastructure.git
+    path: kubernetes/manifests/production/
+    targetRevision: "HEAD"
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - ServerSideApply=true #Needed for CRDs

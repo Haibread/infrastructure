@@ -1,0 +1,20 @@
+applications:
+  - name: production-argocd-aoa
+    namespace: "argocd"
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
+    destination:
+      server: https://kubernetes.default.svc
+#      name: in-cluster
+      namespace: argocd
+    project: default
+    source:
+      path: kubernetes/apps/production/argocd
+      repoURL: https://github.com/Haibread/infrastructure.git
+      targetRevision: "HEAD"
+      directory:
+        recurse: true
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true

@@ -1,0 +1,208 @@
+---
+global:
+  dnsService: "coredns"
+
+loki:
+  schemaConfig:
+    configs:
+    - from: "2024-01-04"
+      store: tsdb
+      object_store: s3
+      schema: v12
+      index:
+        prefix: loki_index_
+        period: 24h
+  
+  structuredConfig:
+    query_scheduler:
+      max_outstanding_requests_per_tenant: 32768 # https://grafana.com/docs/loki/latest/operations/storage/tsdb/
+    querier:
+      max_concurrent: 16 # https://grafana.com/docs/loki/latest/operations/storage/tsdb/
+    compactor:
+      working_directory: /var/loki/compactor
+    limits_config:
+      enforce_metric_name: false
+      reject_old_samples: true
+      reject_old_samples_max_age: 168h
+      max_cache_freshness_per_query: 10m
+      split_queries_by_interval: 15m
+      ingestion_rate_mb: 100 # Default 4
+      ingestion_burst_size_mb: 1000 # Default 6
+      max_global_streams_per_user: 0 # Default 5000
+    common:
+      compactor_address: http://{{ include "loki.compactorFullname" . }}:3100
+      storage:
+        s3:
+          bucketnames: "minio.homelab.lan"
+          region: "us-east-1"
+          access_key_id: "${S3_LOKI_ACCESS_KEY_ID}"
+          secret_access_key: "${S3_LOKI_SECRET_ACCESS_KEY}"
+          endpoint: "http://minio.homelab.lan:10107"
+
+  storageConfig:
+    #boltdb_shipper:
+      #shared_store: aws
+    tsdb_shipper:
+      active_index_directory: /var/loki/index
+      cache_location: /var/loki/cache
+      shared_store: s3
+    #aws:
+    #  s3forcepathstyle: true
+    #  bucketnames: "poc-observability-mutu-loki"
+    #  region: "fr-par"
+    #  access_key_id: ${S3_LOKI_ACCESS_KEY_ID}
+    #  secret_access_key: ${S3_LOKI_SECRET_ACCESS_KEY}
+    #  endpoint: "https://s3.fr-par.scw.cloud"
+
+ingester:
+  persistence:
+    enabled: true
+  replicas: 10
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnv:
+    - name: S3_LOKI_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: accesskey
+    - name: S3_LOKI_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: secretkey
+
+distributor:
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnv:
+    - name: S3_LOKI_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: accesskey
+    - name: S3_LOKI_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: secretkey
+
+querier:
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnv:
+    - name: S3_LOKI_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: accesskey
+    - name: S3_LOKI_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: secretkey
+
+queryFrontend:
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnv:
+    - name: S3_LOKI_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: accesskey
+    - name: S3_LOKI_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: secretkey
+
+queryScheduler:
+  extraArgs:
+    - '-config.expand-env=true'
+  enabled: true
+  extraEnv:
+    - name: S3_LOKI_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: accesskey
+    - name: S3_LOKI_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: secretkey
+
+tableManager:
+  enabled: true
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnv:
+    - name: S3_LOKI_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: accesskey
+    - name: S3_LOKI_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: secretkey
+
+serviceMonitor:
+  enabled: false
+
+gateway:
+  enabled: true
+
+compactor:
+  enabled: true
+  persistence:
+    enabled: true
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnv:
+    - name: S3_LOKI_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: accesskey
+    - name: S3_LOKI_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: secretkey
+
+ruler:
+  enabled: false # We need better support before enabling it again https://grafana.com/docs/loki/latest/alert/
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnv:
+    - name: S3_LOKI_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: accesskey
+    - name: S3_LOKI_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: secretkey
+
+indexGateway:
+  enabled: true
+  persistence:
+    enabled: true # Required for TSDB .. ?
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnv:
+    - name: S3_LOKI_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: accesskey
+    - name: S3_LOKI_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bucket-grafana-loki
+          key: secretkey

@@ -23,6 +23,11 @@ variable "github_token" {
   type      = string
 }
 
+variable "scw_secret_key" {
+  sensitive = true
+  type      = string
+}
+
 //variable "github_org" {
 //  type = string
 //}

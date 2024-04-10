@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: production-argocd
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    name: in-cluster
+  project: default
+  sources:
+    - repoURL: https://argoproj.github.io/argo-helm
+      targetRevision: "6.6.0"
+      chart: argo-cd
+      helm:
+        releaseName: argocd
+        valueFiles:
+          - $values/kubernetes/values/production/argocd/values.yaml
+    - repoURL: https://github.com/Haibread/infrastructure.git
+      targetRevision: "HEAD"
+      ref: values
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - ServerSideApply=true #Needed for CRDs

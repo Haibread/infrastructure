@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: production-argocd
+  namespace: argocd
+spec:
+  description: "Production Cluster"
+  sourceRepos:
+    - "https://github.com/Haibread/infrastructure.git"
+  destinations:
+    - namespace: "argocd"
+      server: https://kubernetes.default.svc
+    - namespace: "monitoring"
+  clusterResourceWhitelist:
+    - kind: "*"
+      group: "*"
+  namespaceResourceWhitelist:
+    - kind: "*"
+      group: "*"

@@ -7,7 +7,7 @@ resource "helm_release" "argocd" {
   version          = "6.6.0"
   values           = [file("${path.module}/argocd.yaml")]
 
-  depends_on = [ kubernetes_namespace.argocd ]
+  depends_on = [kubernetes_namespace.argocd]
 }
 
 resource "kubernetes_secret" "github-repo" {

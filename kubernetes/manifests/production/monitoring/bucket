@@ -1,0 +1,21 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+    name: bucket-grafana-loki
+    namespace: monitoring
+spec:
+    refreshInterval: 600s
+    secretStoreRef:
+        kind: ClusterSecretStore
+        name: secret-store
+    target:
+        name: bucket-grafana-loki
+        creationPolicy: Owner
+    dataFrom:
+    - extract:
+        key: id:3a2ea3a7-7060-4103-a243-80ee178a518b
+        version: latest_enabled
+        conversionStrategy: Default # Need to avoid reconciling loop on argocd
+        decodingStrategy: None # Need to avoid reconciling loop on argocd
+        metadataPolicy: None # Need to avoid reconciling loop on argocd
