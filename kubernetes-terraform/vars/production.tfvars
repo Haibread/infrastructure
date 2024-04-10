@@ -3,7 +3,7 @@ kubernetes_version    = "v1.28.8+rke2r1"
 kubernetes_image_name = "Ubuntu-2404-cloudimg"
 
 #nodes
-cluster_worker_count  = 3
+cluster_worker_count  = 6
 cluster_worker_cpu    = 6
 cluster_worker_memory = 16384
 cluster_worker_disk   = 40
