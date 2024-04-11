@@ -8,4 +8,9 @@ spec:
    exportPodCIDR: false
    neighbors:
     - peerAddress: '172.16.112.253/32'
+      connectRetryTimeSeconds: 120
+      eBGPMultihopTTL: 1
+      holdTimeSeconds: 90
+      keepAliveTimeSeconds: 30
       peerASN: 65000
+      peerPort: 179
