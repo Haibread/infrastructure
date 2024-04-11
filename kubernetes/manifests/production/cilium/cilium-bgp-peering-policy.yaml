@@ -5,7 +5,7 @@ metadata:
 spec:
  nodeSelector:
    matchLabels:
-    node-role.kubernetes.io/worker: true
+    node-role.kubernetes.io/worker: "true"
  virtualRouters:
  - localASN: 65001
    exportPodCIDR: false
