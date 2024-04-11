@@ -5,7 +5,10 @@ metadata:
 spec:
  virtualRouters:
  - localASN: 65001
-   exportPodCIDR: true
+   exportPodCIDR: false
+   serviceAdvertisements:
+   - LoadBalancerIP
+   - ExternalIP
    neighbors:
     - peerAddress: '172.16.112.253/32'
       connectRetryTimeSeconds: 120
