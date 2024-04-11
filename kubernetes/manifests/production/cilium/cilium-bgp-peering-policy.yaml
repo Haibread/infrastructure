@@ -6,9 +6,9 @@ spec:
  virtualRouters:
  - localASN: 65001
    exportPodCIDR: false
-   serviceAdvertisements:
-   - LoadBalancerIP
-   - ExternalIP
+   serviceSelector:
+       matchExpressions:
+          - {key: somekey, operator: NotIn, values: ['never-used-value']}
    neighbors:
     - peerAddress: '172.16.112.253/32'
       connectRetryTimeSeconds: 120
